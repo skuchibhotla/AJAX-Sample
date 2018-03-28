@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AjaxTut.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,18 @@ namespace AjaxTut.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(string UserName, string Email, string Password)     // Pass all the fields that were passed in the AJAX data field. 
+        {
+            var user = new UserModel();
+
+            user.UserName = UserName;
+            user.Email = Email;
+            user.Password = Password;
+            
+            return Json(user, JsonRequestBehavior.AllowGet);
         }
     }
 }
