@@ -1,14 +1,25 @@
-﻿@{
+﻿@model AjaxTut.Models.UserModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-@model AjaxTut.Models.UserModel
+<style>
+    #UserTable tr th{
+        color: white;
+        width: 300px;
+        height: 40px;
+        text-decoration: solid;
+        background-color: yellowgreen;
+        padding: 10px;
+    }
+</style>
 
 <div class="row">
     <div class="col-md-8 col-lg-offset-4">
         <h2>Add User</h2>
         <br />
-        <span>User Name: </span>@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })<br />
+        <span>User Name: </span>@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })<br />        
         <span>Email: </span>@Html.TextBoxFor(x => x.Email, new { @class = "form-control" })<br />
         <span>Password: </span>@Html.TextBoxFor(x => x.Password, new { @class = "form-control" })<br />
         <p><a class="btn btn-default" onclick="SaveUser()">Save</a></p><br /><br /><br />
@@ -27,3 +38,27 @@
         </table>
     </div>
 </div>
+
+<script>
+    function Saveuser() {
+        // Getting the values from the TextBoxes to save to the Database. 
+        var userName = $("#UserName").val();
+        var emailID = $("#Email").val();
+        var password = $("#Password").val();
+
+        $.ajax({
+            type: "POST",   // What type of function  is this?
+            url: "Home/AddUser", // Where you're going to post this to?
+            data: JSON.stringify({ UserName: userName, Email: emailID, Password: password }),   // The jQuery AJAX handles JSON properties. While POSTing to the method, if you want some value to be posted back to this AJAX call, then it has to be in JSON format. So, this will convert the data into JSON string.
+            contentType: "application/json", // The type of content we are creating.
+
+            // If the call is success, what to do?
+            success: function (result) {
+                $('#UserTable').append("<tr> <td>" +
+                    result.UserName + "</td> <td>" +
+                    result.Email + "</td> <td>" +
+                    result.Password + "</td> </tr>");
+            }
+        })
+    }
+</script>
