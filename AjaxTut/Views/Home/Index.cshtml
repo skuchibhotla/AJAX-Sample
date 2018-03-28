@@ -22,7 +22,7 @@
         <span>User Name: </span>@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })<br />        
         <span>Email: </span>@Html.TextBoxFor(x => x.Email, new { @class = "form-control" })<br />
         <span>Password: </span>@Html.TextBoxFor(x => x.Password, new { @class = "form-control" })<br />
-        <p><a class="btn btn-default" onclick="SaveUser()">Save</a></p><br /><br /><br />
+        <p><a class="btn btn-default" onclick='SaveUser()'>Save</a></p><br /><br /><br />
     </div>
 </div>
 
@@ -39,8 +39,8 @@
     </div>
 </div>
 
-<script>
-    function Saveuser() {
+<script type="text/javascript">
+    function SaveUser() {
         // Getting the values from the TextBoxes to save to the Database. 
         var userName = $("#UserName").val();
         var emailID = $("#Email").val();
