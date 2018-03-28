@@ -58,6 +58,11 @@
                     result.UserName + "</td> <td>" +
                     result.Email + "</td> <td>" +
                     result.Password + "</td> </tr>");
+
+                // To clear the TextBoxes after storing data.
+                $("#UserName").val("");
+                $("#Email").val("");
+                $("Password").val("");
             }
         })
     }
